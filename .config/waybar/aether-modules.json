@@ -1,0 +1,47 @@
+{
+    "custom/aether-brand": {
+        "format": "▲  A E T H E R",
+        "tooltip-format": "AETHER · Research · Create · Explore\nClick to go to Overview (Workspace 1)",
+        "on-click": "hyprctl dispatch workspace 1"
+    },
+    "custom/nav-overview": {
+        "format": "Overview",
+        "tooltip-format": "Workspace 1 - Overview & Studio",
+        "on-click": "hyprctl dispatch workspace 1"
+    },
+    "custom/nav-research": {
+        "format": "Research",
+        "tooltip-format": "Launch Research (Firefox)",
+        "on-click": "firefox &"
+    },
+    "custom/nav-projects": {
+        "format": "Projects",
+        "tooltip-format": "Open AETHER Projects (Dolphin)",
+        "on-click": "dolphin /home/aetheon-star/AETHER &"
+    },
+    "custom/nav-library": {
+        "format": "Library",
+        "tooltip-format": "Open Library (Documents / Papers)",
+        "on-click": "dolphin /home/aetheon-star/Documents &"
+    },
+    "custom/nav-notes": {
+        "format": "Notes",
+        "tooltip-format": "Open Research Notes (Obsidian)",
+        "on-click": "/home/aetheon-star/.local/opt/obsidian/Obsidian.AppImage &"
+    },
+    "custom/nav-terminal": {
+        "format": "Terminal",
+        "tooltip-format": "Open Konsole Terminal",
+        "on-click": "konsole &"
+    },
+    "custom/nav-tools": {
+        "format": "Tools",
+        "tooltip-format": "Open Applications & Tools Launcher",
+        "on-click": "~/.config/hypr/scripts/launcher.sh"
+    },
+    "custom/close": {
+        "format": "  ",
+        "tooltip-format": "Close Active Window (ALT+F4 / SUPER+Q)",
+        "on-click": "hyprctl dispatch killactive"
+    }
+}

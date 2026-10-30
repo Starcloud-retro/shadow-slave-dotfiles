@@ -1,0 +1,97 @@
+/* -----------------------------------------------------
+ * AETHER Dramatic Cinematic Power Menu
+ * 5-Card Horizontal Floating Modal
+ * ----------------------------------------------------- */
+
+configuration {
+    font:                       "JetBrainsMono Nerd Font 13";
+    show-icons:                 false;
+    hover-select:               true;
+    me-select-entry:            "";
+    me-accept-entry:            "MousePrimary";
+}
+
+* {
+    background-color: transparent;
+    text-color: #f5f5fa;
+}
+
+window {
+    width:                        54em;
+    location:                     center;
+    anchor:                       center;
+    fullscreen:                   false;
+    spacing:                      0px;
+    padding:                      30px;
+    margin:                       0px;
+    border:                       2px;
+    border-color:                 #9d4edd;
+    border-radius:                24px;
+    background-color:             rgba(5, 5, 8, 0.96);
+    cursor:                       "default";
+}
+
+mainbox {
+    enabled:                     true;
+    spacing:                     20px;
+    padding:                     10px;
+    orientation:                 vertical;
+    children:                    [ "textbox-header", "listview" ];
+    background-color:            transparent;
+}
+
+textbox-header {
+    expand:                      false;
+    str:                         "⏻   S Y S T E M   P O W E R";
+    horizontal-align:            0.5;
+    font:                        "JetBrainsMono Nerd Font Bold 16";
+    text-color:                  #c77dff;
+    padding:                     6px;
+    background-color:            transparent;
+}
+
+listview {
+    enabled:                     true;
+    columns:                     5;
+    lines:                       1;
+    cycle:                       true;
+    dynamic:                     true;
+    scrollbar:                   false;
+    layout:                      vertical;
+    spacing:                     16px;
+    background-color:            transparent;
+}
+
+element {
+    enabled:                     true;
+    padding:                     24px 8px;
+    cursor:                      pointer;
+    background-color:            #0e071a;
+    text-color:                  #f5f5fa;
+    border-radius:               16px;
+    border:                      1px;
+    border-color:                #3c096c;
+}
+
+element normal.normal, element alternate.normal {
+    background-color:            #0e071a;
+    text-color:                  #f5f5fa;
+    border:                      1px;
+    border-color:                #3c096c;
+}
+
+element selected.normal, element selected.active {
+    background-color:            #3c096c;
+    text-color:                  #ffffff;
+    border:                      2px;
+    border-color:                #c77dff;
+}
+
+element-text {
+    vertical-align:              0.5;
+    horizontal-align:            0.5;
+    cursor:                      inherit;
+    background-color:            transparent;
+    text-color:                  inherit;
+    font:                        "JetBrainsMono Nerd Font Bold 13";
+}

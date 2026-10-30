@@ -1,0 +1,11 @@
+# Logs and runtime files
+*.log
+*.bak
+*.tmp
+.cache/
+__pycache__/
+
+# Sensitive or machine-specific tokens
+*.token
+*.key
+.env

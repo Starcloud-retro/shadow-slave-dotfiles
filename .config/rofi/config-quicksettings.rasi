@@ -1,0 +1,133 @@
+/* -----------------------------------------------------
+ * AETHER Dark Void Purple - Quick Settings Theme
+ * Floating northeast flyout matching Cliphist UI
+ * ----------------------------------------------------- */
+
+configuration {
+    font:                       "JetBrainsMono Nerd Font 11";
+    show-icons:                 false;
+    hover-select:               true;
+    scroll-method:              1;
+    me-select-entry:            "";
+    me-accept-entry:            "MousePrimary";
+}
+
+@import "~/.config/ml4w/settings/rofi-font.rasi"
+@theme "~/.config/rofi/colors.rasi"
+@import "~/.cache/ml4w/hyprland-dotfiles/current_wallpaper.rasi"
+@import "~/.config/ml4w/settings/rofi-border.rasi"
+@import "~/.config/ml4w/settings/rofi-border-radius.rasi"
+
+* {
+    color11: @primary;
+    color5: @on-primary-fixed;
+    foreground: @on-surface;
+}
+
+window {
+    width:                        26em;
+    x-offset:                     -1.5em;
+    y-offset:                     3.5em;
+    spacing:                      0px;
+    padding:                      0px;
+    margin:                       0px;
+    border:                       2px;
+    border-color:                 #9d4edd;
+    cursor:                       "default";
+    transparency:                 "real";
+    location:                     northeast;
+    anchor:                       northeast;
+    fullscreen:                   false;
+    enabled:                      true;
+    border-radius:                14px;
+    background-color:             rgba(5, 5, 8, 0.96);
+}
+
+mainbox {
+    enabled:                     true;
+    spacing:                     0em;
+    padding:                     0.4em;
+    orientation:                 vertical;
+    children:                    [ "inputbar", "listview" ];
+    background-color:            transparent;
+}
+
+inputbar {
+    enabled:                     true;
+    spacing:                     0.5em;
+    padding:                     0.6em 0.8em;
+    margin:                      0.3em;
+    border-radius:               10px;
+    background-color:            #10071c;
+    border:                      1px;
+    border-color:                #3c096c;
+    children:                    [ "prompt", "entry" ];
+}
+
+prompt {
+    enabled:                     true;
+    padding:                     0.2em 0.4em;
+    text-color:                  #c77dff;
+    font:                        "JetBrainsMono Nerd Font Bold 11";
+    background-color:            transparent;
+}
+
+entry {
+    enabled:                     true;
+    padding:                     0.2em;
+    background-color:            transparent;
+    text-color:                  #f5f5fa;
+    cursor:                      text;
+    placeholder:                 "Filter...";
+    placeholder-color:           #7b2cbf;
+}
+
+listview {
+    padding:                     0.4em;
+    spacing:                     0.3em;
+    margin:                      0em;
+    enabled:                     true;
+    columns:                     1;
+    lines:                       8;
+    cycle:                       true;
+    dynamic:                     true;
+    scrollbar:                   false;
+    layout:                      vertical;
+    reverse:                     false;
+    cursor:                      "default";
+    background-color:            transparent;
+    text-color:                  #f5f5fa;
+}
+
+element {
+    enabled:                     true;
+    padding:                     0.6em 0.9em;
+    margin:                      0.15em 0.2em;
+    cursor:                      pointer;
+    background-color:            #0a0612;
+    text-color:                  #f5f5fa;
+    border-radius:               8px;
+    border:                      1px;
+    border-color:                rgba(157, 78, 221, 0.25);
+}
+
+element selected.normal, element selected.active {
+    background-color:            #240046;
+    text-color:                  #ffffff;
+    border:                      1px;
+    border-color:                #9d4edd;
+}
+
+element normal.normal, element alternate.normal {
+    background-color:            #0a0612;
+    text-color:                  #f5f5fa;
+}
+
+element-text {
+    vertical-align:              0.5;
+    horizontal-align:            0.0;
+    cursor:                      inherit;
+    background-color:            transparent;
+    text-color:                  inherit;
+    font:                        "JetBrainsMono Nerd Font 11";
+}

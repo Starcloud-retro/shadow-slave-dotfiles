@@ -1,0 +1,93 @@
+/**
+ * Catppuccin Mocha Rofi Theme for AETHER OS
+ **/
+
+configuration {
+    modi: "drun,run,filebrowser";
+    show-icons: true;
+    display-drun: "❖ Apps";
+    display-run: "⌘ Run";
+    display-filebrowser: "📁 Vault";
+    drun-display-format: "{name}";
+    font: "JetBrains Mono 11";
+}
+
+* {
+    bg-col:  rgba(17, 17, 27, 0.85);
+    bg-col-light: rgba(30, 30, 46, 0.75);
+    border-col: rgba(180, 190, 254, 0.25);
+    selected-col: rgba(180, 190, 254, 0.18);
+    lavender: #b4befe;
+    mauve: #cba6f7;
+    fg-col: #cdd6f4;
+    fg-col2: #a6adc8;
+    width: 600;
+}
+
+element-text, element-icon , mode-switcher {
+    background-color: inherit;
+    text-color:       inherit;
+}
+
+window {
+    height: 380px;
+    border: 1px;
+    border-color: @border-col;
+    background-color: @bg-col;
+    border-radius: 10px;
+}
+
+mainbox {
+    background-color: transparent;
+}
+
+inputbar {
+    children: [prompt,entry];
+    background-color: @bg-col-light;
+    border-radius: 6px;
+    padding: 4px;
+    margin: 14px 14px 8px 14px;
+    border: 1px solid rgba(180, 190, 254, 0.15);
+}
+
+prompt {
+    background-color: @lavender;
+    padding: 6px 10px;
+    text-color: #11111b;
+    border-radius: 4px;
+    margin: 4px 6px 4px 4px;
+    font: "Cinzel Bold 10";
+}
+
+entry {
+    padding: 8px;
+    margin: 2px 0px 0px 8px;
+    text-color: @fg-col;
+    background-color: transparent;
+}
+
+listview {
+    border: 0px 0px 0px;
+    padding: 6px 14px 14px 14px;
+    margin: 0px 0px 0px 0px;
+    columns: 2;
+    lines: 6;
+    background-color: transparent;
+}
+
+element {
+    padding: 6px 8px;
+    background-color: transparent;
+    text-color: @fg-col;
+    border-radius: 6px;
+}
+
+element-icon {
+    size: 20px;
+}
+
+element selected {
+    background-color:  @selected-col;
+    text-color: #ffffff;
+    border: 1px solid rgba(180, 190, 254, 0.35);
+}

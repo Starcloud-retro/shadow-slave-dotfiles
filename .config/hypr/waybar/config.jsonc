@@ -1,0 +1,68 @@
+{
+  "layer": "top",
+  "position": "top",
+  "height": 38,
+  "spacing": 6,
+  "margin-top": 8,
+  "margin-left": 14,
+  "margin-right": 14,
+  "modules-left": ["custom/aether", "hyprland/workspaces", "custom/vault"],
+  "modules-center": ["hyprland/window"],
+  "modules-right": ["cpu", "memory", "disk", "custom/ollama", "clock", "tray"],
+
+  "custom/aether": {
+    "format": "❖ AETHER OS",
+    "tooltip": false,
+    "on-click": "/home/aetheon-star/AETHER/scripts/launch_aether_kiosk.sh"
+  },
+
+  "custom/vault": {
+    "format": "📁 ~/AETHER-Vault",
+    "tooltip-format": "Master Research Vault",
+    "on-click": "konsole --workdir /home/aetheon-star/AETHER-Vault"
+  },
+
+  "hyprland/workspaces": {
+    "format": "{id}",
+    "on-click": "activate",
+    "all-outputs": true
+  },
+
+  "hyprland/window": {
+    "format": "{title}",
+    "max-length": 45,
+    "separate-outputs": true
+  },
+
+  "cpu": {
+    "format": " {usage}%",
+    "interval": 2
+  },
+
+  "memory": {
+    "format": "󰍛 {percentage}%",
+    "interval": 5
+  },
+
+  "disk": {
+    "format": "󰋊 {percentage_used}%",
+    "path": "/home/aetheon-star",
+    "interval": 30
+  },
+
+  "custom/ollama": {
+    "format": "󰚩 qwen3:4b",
+    "tooltip-format": "Local Ollama Daemon",
+    "interval": 10
+  },
+
+  "clock": {
+    "format": "{:%I:%M %p  ·  %a, %b %d}",
+    "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
+  },
+
+  "tray": {
+    "icon-size": 16,
+    "spacing": 8
+  }
+}
