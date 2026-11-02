@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # -----------------------------------------------------
 # AETHER Dark Void Purple - Quick Settings: Bluetooth
-# Native Rofi overlay matching Cliphist UI
+# Native Rofi overlay matching smooth scrolling & selection
 # -----------------------------------------------------
 
 export LANG="en_IN.UTF-8"
@@ -22,7 +22,6 @@ menu_items="󰂲  Turn Bluetooth OFF\n󰑐  Scan for Devices"
 
 # Get paired devices
 devices_raw=$(bluetoothctl devices)
-info_raw=$(bluetoothctl info 2>/dev/null)
 
 while IFS= read -r dev; do
     [ -z "$dev" ] && continue
@@ -30,10 +29,10 @@ while IFS= read -r dev; do
     name=$(echo "$dev" | cut -d' ' -f3-)
 
     # Check if connected
-    if bluetoothctl info "$mac" | grep -q "Connected: yes"; then
-        menu_items="${menu_items}\n✓ 󰂱  $name  ($mac) [Connected]"
+    if bluetoothctl info "$mac" 2>/dev/null | grep -q "Connected: yes"; then
+        menu_items="${menu_items}\n✓ 󰂱  $name  [$mac] (Connected)"
     else
-        menu_items="${menu_items}\n  󰂯  $name  ($mac) [Paired]"
+        menu_items="${menu_items}\n  󰂯  $name  [$mac] (Paired)"
     fi
 done <<< "$devices_raw"
 
@@ -47,11 +46,11 @@ case "$chosen" in
         notify-send -u normal -i bluetooth-disabled "Bluetooth" "Bluetooth powered OFF"
         ;;
     *"Scan for Devices"*)
-        notify-send -u normal -i bluetooth "Bluetooth" "Scanning for nearby devices (5 seconds)..."
+        notify-send -u normal -i bluetooth "Bluetooth" "Scanning for nearby devices..."
         bluetoothctl --timeout 5 scan on
         exec "$0"
         ;;
-    *"[Connected]"*)
+    *"(Connected)"*)
         mac=$(echo "$chosen" | grep -o -E '([[:xdigit:]]{1,2}:){5}[[:xdigit:]]{1,2}')
         action=$(printf "󰅖  Disconnect Device\n󰆴  Unpair / Forget\n󰑐  Cancel" | rofi -dmenu -i -config ~/.config/rofi/config-quicksettings.rasi -p "Manage Device")
         if [[ "$action" =~ "Disconnect" ]]; then
@@ -62,9 +61,9 @@ case "$chosen" in
             notify-send -u normal -i bluetooth "Bluetooth" "Device removed"
         fi
         ;;
-    *"[Paired]"*)
+    *"(Paired)"*)
         mac=$(echo "$chosen" | grep -o -E '([[:xdigit:]]{1,2}:){5}[[:xdigit:]]{1,2}')
-        notify-send -u normal -i bluetooth "Bluetooth" "Connecting to $mac..."
+        notify-send -u normal -i bluetooth "Bluetooth" "Connecting to device..."
         if bluetoothctl connect "$mac"; then
             notify-send -u normal -i bluetooth "Bluetooth" "Successfully connected"
         else

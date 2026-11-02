@@ -1,15 +1,15 @@
 /* -----------------------------------------------------
  * AETHER Dark Void Purple - Quick Settings Theme
- * Floating northeast flyout matching Cliphist UI
+ * Smooth scrolling, reliable click-selection & scrollbar
  * ----------------------------------------------------- */
 
 configuration {
     font:                       "JetBrainsMono Nerd Font 11";
     show-icons:                 false;
-    hover-select:               true;
-    scroll-method:              1;
-    me-select-entry:            "";
-    me-accept-entry:            "MousePrimary";
+    hover-select:               false;
+    scroll-method:              0;
+    me-select-entry:            "MousePrimary";
+    me-accept-entry:            "!MousePrimary";
 }
 
 @import "~/.config/ml4w/settings/rofi-font.rasi"
@@ -25,7 +25,7 @@ configuration {
 }
 
 window {
-    width:                        26em;
+    width:                        30em;
     x-offset:                     -1.5em;
     y-offset:                     3.5em;
     spacing:                      0px;
@@ -46,7 +46,7 @@ window {
 mainbox {
     enabled:                     true;
     spacing:                     0em;
-    padding:                     0.4em;
+    padding:                     0.5em;
     orientation:                 vertical;
     children:                    [ "inputbar", "listview" ];
     background-color:            transparent;
@@ -78,25 +78,35 @@ entry {
     background-color:            transparent;
     text-color:                  #f5f5fa;
     cursor:                      text;
-    placeholder:                 "Filter...";
+    placeholder:                 "Search / filter...";
     placeholder-color:           #7b2cbf;
 }
 
 listview {
-    padding:                     0.4em;
+    padding:                     0.4em 0.2em;
     spacing:                     0.3em;
     margin:                      0em;
     enabled:                     true;
     columns:                     1;
-    lines:                       8;
-    cycle:                       true;
+    lines:                       10;
+    cycle:                       false;
     dynamic:                     true;
-    scrollbar:                   false;
+    scrollbar:                   true;
     layout:                      vertical;
     reverse:                     false;
-    cursor:                      "default";
+    cursor:                      pointer;
     background-color:            transparent;
     text-color:                  #f5f5fa;
+}
+
+scrollbar {
+    width:                       5px;
+    border:                      0px;
+    handle-width:                5px;
+    handle-color:                #9d4edd;
+    border-radius:               8px;
+    background-color:            #10071c;
+    margin:                      0px 0px 0px 6px;
 }
 
 element {
@@ -126,7 +136,7 @@ element normal.normal, element alternate.normal {
 element-text {
     vertical-align:              0.5;
     horizontal-align:            0.0;
-    cursor:                      inherit;
+    cursor:                      pointer;
     background-color:            transparent;
     text-color:                  inherit;
     font:                        "JetBrainsMono Nerd Font 11";

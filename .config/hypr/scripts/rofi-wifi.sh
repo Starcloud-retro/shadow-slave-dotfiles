@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # -----------------------------------------------------
 # AETHER Dark Void Purple - Quick Settings: Wi-Fi
-# Native Rofi overlay matching Cliphist UI
+# Native Rofi overlay with smooth scrolling and robust selection
 # -----------------------------------------------------
 
 export LANG="en_IN.UTF-8"
@@ -26,6 +26,14 @@ menu_items="󰤮  Disable Wi-Fi\n󰑐  Rescan Networks"
 # Scan networks
 raw_list=$(nmcli -t -f IN-USE,SSID,SIGNAL,SECURITY dev wifi list)
 
+declare -A seen_ssids
+
+# If connected, list active network at top
+if [ -n "$active_ssid" ]; then
+    menu_items="${menu_items}\n✓ 󰤨  ${active_ssid}  [Connected]"
+    seen_ssids["$active_ssid"]=1
+fi
+
 while IFS= read -r line; do
     [ -z "$line" ] && continue
     in_use=$(echo "$line" | cut -d: -f1)
@@ -34,20 +42,17 @@ while IFS= read -r line; do
     security=$(echo "$line" | cut -d: -f4-)
     
     [ -z "$ssid" ] && continue
+    [ "${seen_ssids[$ssid]}" = "1" ] && continue
+    seen_ssids["$ssid"]=1
 
-    if [ "$in_use" = "*" ]; then
+    if [ "$signal" -ge 70 ]; then
         icon="󰤨"
-        label="✓ $icon  $ssid  ($signal% | $security) [Connected]"
+    elif [ "$signal" -ge 40 ]; then
+        icon="󰤥"
     else
-        if [ "$signal" -ge 70 ]; then
-            icon="󰤨"
-        elif [ "$signal" -ge 40 ]; then
-            icon="󰤥"
-        else
-            icon="󰤟"
-        fi
-        label="  $icon  $ssid  ($signal% | $security)"
+        icon="󰤟"
     fi
+    label="  $icon  $ssid  ($signal% | $security)"
     menu_items="${menu_items}\n${label}"
 done <<< "$raw_list"
 
@@ -61,7 +66,9 @@ case "$chosen" in
         notify-send -u normal -i network-wireless-offline "Wi-Fi" "Wi-Fi disabled"
         ;;
     *"Rescan Networks"*)
+        notify-send -u normal -i network-wireless "Wi-Fi" "Scanning for networks..."
         nmcli device wifi rescan
+        sleep 1
         exec "$0"
         ;;
     *"[Connected]"*)
@@ -72,19 +79,18 @@ case "$chosen" in
         fi
         ;;
     *)
-        # Extract selected SSID
-        clean_ssid=$(echo "$chosen" | sed 's/^[^A-Za-z0-9]*//' | awk '{print $1}')
-        # Match from raw list if SSID had spaces
-        matched_ssid=""
-        while IFS= read -r line; do
-            cur_ssid=$(echo "$line" | cut -d: -f2)
-            if [[ "$chosen" == *"$cur_ssid"* && -n "$cur_ssid" ]]; then
-                matched_ssid="$cur_ssid"
-                break
-            fi
-        done <<< "$raw_list"
+        # Extract selected SSID using reliable regex
+        matched_ssid=$(python3 -c "
+import re, sys
+s = '''$chosen'''
+m = re.search(r'^\s*(?:✓\s*)?[^\s]+\s+(.+?)\s+\(\d+%', s)
+if m:
+    print(m.group(1).strip())
+elif '[Connected]' in s:
+    m2 = re.search(r'^\s*(?:✓\s*)?[^\s]+\s+(.+?)\s+\[Connected\]', s)
+    if m2: print(m2.group(1).strip())
+")
 
-        [ -z "$matched_ssid" ] && matched_ssid="$clean_ssid"
         [ -z "$matched_ssid" ] && exit 0
 
         # Check if already saved in NetworkManager connections
@@ -98,7 +104,7 @@ case "$chosen" in
         else
             # Check if network is password protected
             if echo "$chosen" | grep -Eq "WPA|WEP|802.1x"; then
-                password=$(rofi -dmenu -password -config ~/.config/rofi/config-quicksettings.rasi -p "Key for $matched_ssid")
+                password=$(rofi -dmenu -password -config ~/.config/rofi/config-quicksettings.rasi -p "Password for $matched_ssid")
                 [ -z "$password" ] && exit 0
                 notify-send -u normal -i network-wireless "Connecting..." "Connecting to $matched_ssid"
                 if nmcli device wifi connect "$matched_ssid" password "$password"; then
