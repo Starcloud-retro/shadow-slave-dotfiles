@@ -14,9 +14,9 @@ apply_battery_profile() {
     hyprctl keyword decoration:shadow:enabled false >/dev/null 2>&1
     
     # Cap excessive brightness to save display panel power
-    cur_bright=$(/home/aetheon-star/.local/bin/brightnessctl -m 2>/dev/null | awk -F, '{print $4}' | tr -d '%')
+    cur_bright=$(brightnessctl -m 2>/dev/null | awk -F, '{print $4}' | tr -d '%')
     if [ -n "$cur_bright" ] && [ "$cur_bright" -gt 50 ]; then
-        /home/aetheon-star/.local/bin/brightnessctl set 40% >/dev/null 2>&1
+        brightnessctl set 40% >/dev/null 2>&1
     fi
     
     notify-send -u low -i battery-low "Battery Mode Activated" "Switched to Power-Saver profile. GPU blur/shadows disabled to extend battery." 2>/dev/null

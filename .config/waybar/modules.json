@@ -50,7 +50,7 @@
     "tooltip": true,
     "tooltip-format": "Home / Desktop\nClick: Show clean desktop (empty workspace)\nRight-click: Open Home folder",
     "on-click": "hyprctl dispatch workspace empty",
-    "on-click-right": "dolphin /home/aetheon-star"
+    "on-click-right": "dolphin ~"
   },
   // Taskbar
   "wlr/taskbar": {
@@ -181,7 +181,7 @@
   // Power Menu
   "custom/exit": {
     "format": "⏻",
-    "on-click": "/home/aetheon-star/.config/hypr/scripts/rofi-power.sh",
+    "on-click": "$HOME/.config/hypr/scripts/rofi-power.sh",
     "tooltip-format": "Power Menu (Shutdown / Reboot / Sleep / Lock)"
   },
   // SwayNC
@@ -368,7 +368,7 @@
     "tooltip-format-ethernet": "󰈀 {ifname}\nIP: {ipaddr}",
     "tooltip-format-disconnected": "Network Disconnected\nClick: Scan & Connect",
     "max-length": 50,
-    "on-click": "/home/aetheon-star/.config/hypr/scripts/rofi-wifi.sh",
+    "on-click": "$HOME/.config/hypr/scripts/rofi-wifi.sh",
     "on-click-right": "konsole -e nmtui &"
   },
   // Battery
@@ -425,7 +425,7 @@
       ]
     },
     "tooltip-format": "Volume: {volume}%\nScroll: Adjust volume\nLeft-click: Audio Quick Settings\nRight-click: Toggle Mute",
-    "on-click": "/home/aetheon-star/.config/hypr/scripts/rofi-volume.sh",
+    "on-click": "$HOME/.config/hypr/scripts/rofi-volume.sh",
     "on-click-right": "pactl set-sink-mute @DEFAULT_SINK@ toggle"
   },
   // Bluetooth
@@ -436,7 +436,7 @@
     "format-off": "󰂲",
     "format-on": "",
     "interval": 5,
-    "on-click": "/home/aetheon-star/.config/hypr/scripts/rofi-bluetooth.sh",
+    "on-click": "$HOME/.config/hypr/scripts/rofi-bluetooth.sh",
     "on-click-right": "konsole -e bluetoothctl &",
     "tooltip-format": "Bluetooth: {status}\nLeft-click: Bluetooth Quick Menu\nRight-click: bluetoothctl",
     "tooltip-format-connected": "Connected: {num_connections} devices\n\n{device_enumerate}",
@@ -460,9 +460,9 @@
       "󰃠"
     ],
     "scroll-step": 5,
-    "on-scroll-up": "/home/aetheon-star/.local/bin/brightnessctl set +5%",
-    "on-scroll-down": "/home/aetheon-star/.local/bin/brightnessctl set 5%-",
-    "on-click": "/home/aetheon-star/.config/hypr/scripts/rofi-brightness.sh",
+    "on-scroll-up": "brightnessctl set +5%",
+    "on-scroll-down": "brightnessctl set 5%-",
+    "on-click": "$HOME/.config/hypr/scripts/rofi-brightness.sh",
     "tooltip-format": "Brightness: {percent}%\nScroll: Adjust brightness\nLeft-click: Brightness Quick Menu"
   }
 }

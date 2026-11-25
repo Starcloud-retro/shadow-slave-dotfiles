@@ -2,7 +2,116 @@
 
 > *"From the shadows we rise. Lost from light, bound to truth."*
 
-An aesthetic, distraction-free **Arch Linux / EndeavourOS** desktop environment themed after **Shadow Slave** (The Stormlit Citadel & The Storm Sea), customized specifically for scientific research, mathematics, coding, and AI workflows.
+An aesthetic, distraction-free **Arch Linux / EndeavourOS** desktop environment themed after **Shadow Slave** (*The Stormlit Citadel* & *The Storm Sea*), customized specifically for scientific research, mathematics, coding, and AI workflows.
+
+---
+
+## 🚀 Quick Setup & Installation
+
+Clone the repository and run the automated installer:
+
+```bash
+git clone git@github.com:Starcloud-retro/shadow-slave-dotfiles.git ~/shadow-slave-dotfiles
+cd ~/shadow-slave-dotfiles
+chmod +x install.sh
+./install.sh
+```
+
+### Deployment Modes
+* **Default (Symlink Mode)**: Links repo folders into `~/.config/`. Any edits you make in `~/.config/` immediately reflect in the git repo.
+  ```bash
+  ./install.sh
+  ```
+* **Copy Mode (`--copy` / `-c`)**: Copies the configuration files directly into `~/.config/` without symlinks.
+  ```bash
+  ./install.sh --copy
+  ```
+
+### Safe Automated Backups
+Before linking or copying, `install.sh` automatically detects any pre-existing configuration folders (e.g. `~/.config/hypr`) and creates a timestamped backup (`~/.config/<folder>.bak.YYYY-MM-DD`). Existing files are never clobbered.
+
+---
+
+## 🖥️ Machine-Specific Display & GPU Setup (`monitors.conf`)
+
+Display resolutions, refresh rates, scaling factors, and GPU-specific drivers are completely isolated from the main configuration into a modular file: **`~/.config/hypr/monitors.conf`** (sourced directly by `hyprland.conf`).
+
+### Default Behavior
+Out of the box, `monitors.conf` uses auto-detection:
+```hyprlang
+monitor=,preferred,auto,1
+```
+
+### Customizing for Your Hardware
+Open `~/.config/hypr/monitors.conf` to tailor your setup:
+
+* **Laptop Internal Display**:
+  ```hyprlang
+  monitor = eDP-1, 1920x1080@60, 0x0, 1
+  ```
+* **Dual Monitor Setup (Laptop below external monitor)**:
+  ```hyprlang
+  monitor = eDP-1, 1920x1080@60, 0x1080, 1
+  monitor = HDMI-A-1, 1920x1080@60, 0x0, 1
+  ```
+* **HiDPI / 2K Display (Fractional Scaling)**:
+  ```hyprlang
+  monitor = eDP-1, 2560x1440@120, 0x0, 1.25
+  ```
+* **NVIDIA Proprietary GPU Drivers**:
+  Uncomment the hardware acceleration variables in `monitors.conf`:
+  ```hyprlang
+  env = LIBVA_DRIVER_NAME,nvidia
+  env = __GLX_VENDOR_LIBRARY_NAME,nvidia
+  env = NVD_BACKEND,direct
+  env = ELECTRON_OZONE_PLATFORM_HINT,auto
+  ```
+* **Virtual Machine / Software Rendering (KVM / QEMU)**:
+  ```hyprlang
+  env = WLR_RENDERER_ALLOW_SOFTWARE,1
+  ```
+
+After editing, apply instantly without logging out:
+```bash
+hyprctl reload
+```
+
+---
+
+## 📦 Required Packages (EndeavourOS / Arch Linux)
+
+`install.sh` automatically audits your system and prints any missing packages. You can install all dependencies via `pacman` and an AUR helper (`yay` / `paru`):
+
+### Official Repositories (`pacman`)
+```bash
+sudo pacman -S --needed \
+  hyprland \
+  waybar \
+  rofi \
+  kitty \
+  konsole \
+  grim \
+  slurp \
+  wl-clipboard \
+  cliphist \
+  swaybg \
+  hyprlock \
+  hypridle \
+  fastfetch \
+  brightnessctl \
+  playerctl \
+  pavucontrol \
+  ttf-jetbrains-mono-nerd \
+  otf-font-awesome
+```
+
+### AUR Packages (`yay`)
+```bash
+yay -S --needed \
+  nwg-dock-hyprland \
+  swaync \
+  wlogout
+```
 
 ---
 
@@ -54,19 +163,6 @@ The Waybar top panel dynamically reflects personal research domains without dist
 | **`PrintScreen`** / **`Super + Shift + S`**| Interactive Region Screenshot (Spectacle / Grimblast) |
 | **`Super + Shift + Q`** | Force close active window |
 | **`Super + Q`** | Close window cleanly |
-
----
-
-## 🚀 One-Line Installation on a New Machine
-
-Clone the repository and run the automated installer:
-
-```bash
-git clone git@github.com:Starcloud-retro/shadow-slave-dotfiles.git ~/shadow-slave-dotfiles
-cd ~/shadow-slave-dotfiles
-chmod +x install.sh
-./install.sh
-```
 
 ---
 

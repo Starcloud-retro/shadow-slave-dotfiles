@@ -17,17 +17,17 @@
     "custom/nav-projects": {
         "format": "Projects",
         "tooltip-format": "Open AETHER Projects (Dolphin)",
-        "on-click": "dolphin /home/aetheon-star/AETHER &"
+        "on-click": "dolphin ~/AETHER &"
     },
     "custom/nav-library": {
         "format": "Library",
         "tooltip-format": "Open Library (Documents / Papers)",
-        "on-click": "dolphin /home/aetheon-star/Documents &"
+        "on-click": "dolphin ~/Documents &"
     },
     "custom/nav-notes": {
         "format": "Notes",
         "tooltip-format": "Open Research Notes (Obsidian)",
-        "on-click": "/home/aetheon-star/.local/opt/obsidian/Obsidian.AppImage &"
+        "on-click": "$HOME/.local/opt/obsidian/Obsidian.AppImage &"
     },
     "custom/nav-terminal": {
         "format": "Terminal",

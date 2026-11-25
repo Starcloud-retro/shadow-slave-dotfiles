@@ -14,9 +14,9 @@ chosen=$(echo -e "$cards" | rofi -dmenu -i -config ~/.config/rofi/config-power.r
 [ -z "$chosen" ] && exit 0
 
 case "$chosen" in
-    *"Shutdown"*) /home/aetheon-star/.config/hypr/scripts/power.sh shutdown ;;
-    *"Reboot"*)   /home/aetheon-star/.config/hypr/scripts/power.sh reboot ;;
-    *"Suspend"*)  /home/aetheon-star/.config/hypr/scripts/power.sh suspend ;;
-    *"Lock"*)     /home/aetheon-star/.config/hypr/scripts/power.sh lock ;;
-    *"Logout"*)   /home/aetheon-star/.config/hypr/scripts/power.sh exit ;;
+    *"Shutdown"*) $HOME/.config/hypr/scripts/power.sh shutdown ;;
+    *"Reboot"*)   $HOME/.config/hypr/scripts/power.sh reboot ;;
+    *"Suspend"*)  $HOME/.config/hypr/scripts/power.sh suspend ;;
+    *"Lock"*)     $HOME/.config/hypr/scripts/power.sh lock ;;
+    *"Logout"*)   $HOME/.config/hypr/scripts/power.sh exit ;;
 esac

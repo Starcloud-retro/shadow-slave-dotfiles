@@ -13,13 +13,13 @@
   "custom/aether": {
     "format": "❖ AETHER OS",
     "tooltip": false,
-    "on-click": "/home/aetheon-star/AETHER/scripts/launch_aether_kiosk.sh"
+    "on-click": "$HOME/AETHER/scripts/launch_aether_kiosk.sh"
   },
 
   "custom/vault": {
     "format": "📁 ~/AETHER-Vault",
     "tooltip-format": "Master Research Vault",
-    "on-click": "konsole --workdir /home/aetheon-star/AETHER-Vault"
+    "on-click": "konsole --workdir ~/AETHER-Vault"
   },
 
   "hyprland/workspaces": {
@@ -46,7 +46,7 @@
 
   "disk": {
     "format": "󰋊 {percentage_used}%",
-    "path": "/home/aetheon-star",
+    "path": "/home",
     "interval": 30
   },
 
